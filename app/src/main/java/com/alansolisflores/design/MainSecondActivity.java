@@ -70,6 +70,10 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
         webImageButton.setOnClickListener(MainSecondActivity.this);
     }
 
+    /**
+     * onClick implementation
+     * @param view UI element
+     */
     @Override
     public void onClick(View view) {
 
@@ -86,7 +90,7 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
             case R.id.PhoneImageButton:
                 String phoneNumber = phoneEditText.getText().toString();
 
-                if(phoneNumber != null && !phoneNumber.trim().isEmpty())
+                if(!phoneNumber.trim().isEmpty())
                 {
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                     {
@@ -126,7 +130,7 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
             case R.id.WebImageButton:
                 String webUri = webEditText.getText().toString();
 
-                if(webUri != null && !webUri.trim().isEmpty())
+                if(!webUri.trim().isEmpty())
                 {
                     openWeb(webUri);
                 }else{
@@ -233,8 +237,7 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
      * @param webUri String web uri
      */
     private void openWeb(String webUri){
-        Intent intentWeb = new Intent(Intent.ACTION_VIEW);
-        intentWeb.setData(Uri.parse(webUri));
+        Intent intentWeb = new Intent(Intent.ACTION_VIEW,Uri.parse(webUri));
         startActivity(intentWeb);
     }
 

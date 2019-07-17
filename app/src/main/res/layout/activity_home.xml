@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="30dp" />
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +25,7 @@
             android:layout_height="56dp"
             android:layout_gravity="bottom"
             android:background="@color/colorPrimaryRed"
-            android:text="Intents"
+            android:text="@string/intents"
             android:textColor="@color/colorIcons" />
     </LinearLayout>
 </LinearLayout>
