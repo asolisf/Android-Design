@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainSecondActivity">
+
+    <!--Form Layout-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="50dp"
+        android:paddingTop="100dp"
+        android:paddingRight="50dp">
+
+        <!--Phone-->
+        <EditText
+            android:id="@+id/PhoneEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/PhoneImageButton"
+            android:inputType="phone" />
+
+        <ImageButton
+            android:id="@+id/PhoneImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_call" />
+
+        <!--Web-->
+        <EditText
+            android:id="@+id/WebEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PhoneEditText"
+            android:layout_marginTop="100dp"
+            android:layout_toLeftOf="@+id/WebImageButton"
+            android:inputType="textUri" />
+
+        <ImageButton
+            android:id="@+id/WebImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PhoneEditText"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="100dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_mapmode" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/CameraImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryRed"
+        android:src="@android:drawable/ic_menu_camera" />
+</RelativeLayout>
