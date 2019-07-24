@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeComponents();
+
+        getSupportActionBar().setLogo(R.mipmap.ic_custom_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void initializeComponents()

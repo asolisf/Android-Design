@@ -51,6 +51,26 @@
             android:background="@android:color/transparent"
             android:src="@android:drawable/ic_menu_mapmode" />
 
+
+        <!--Email-->
+        <EditText
+            android:id="@+id/EmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/WebEditText"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="100dp"
+            android:layout_toStartOf="@id/EmailImageButton"/>
+        <ImageButton
+            android:id="@+id/EmailImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_dialog_email"
+            android:background="@android:color/transparent"
+            android:layout_below="@id/WebEditText"
+            android:layout_marginTop="100dp"
+            android:layout_alignParentRight="true"/>
+
     </RelativeLayout>
 
     <ImageButton

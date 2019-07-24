@@ -1,12 +1,14 @@
 package com.alansolisflores.design;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,17 +29,19 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
      */
     private EditText phoneEditText;
     private EditText webEditText;
+    private EditText emailEditText;
 
     private ImageButton cameraImageButton;
     private ImageButton phoneImageButton;
     private ImageButton webImageButton;
+    private ImageButton emailImageButton;
 
     /**
      * Permissions request codes
      */
     private final int PHONE_CALL_CODE = 100;
     private final int CAMERA_CODE = 101;
-    private final int WEB_CODE = 102;
+    private final int PICTURE_CODE = 102;
 
     //endregion Properties
 
@@ -52,6 +56,10 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_second);
+
+        //Back button in action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initializeComponents();
     }
 
@@ -64,10 +72,12 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
         phoneImageButton    = findViewById(R.id.PhoneImageButton);
         cameraImageButton   = findViewById(R.id.CameraImageButton);
         webImageButton      = findViewById(R.id.WebImageButton);
+        emailImageButton    = findViewById(R.id.EmailImageButton);
 
         phoneImageButton.setOnClickListener(MainSecondActivity.this);
         cameraImageButton.setOnClickListener(MainSecondActivity.this);
         webImageButton.setOnClickListener(MainSecondActivity.this);
+        emailImageButton.setOnClickListener(MainSecondActivity.this);
     }
 
     /**
@@ -139,9 +149,68 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.EmailImageButton:
+                String email = emailEditText.getText().toString();
+
+                if(!email.trim().isEmpty())
+                {
+                    sendEmail(email);
+                }else{
+                    Toast.makeText(MainSecondActivity.this,
+                            "Enter email",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
             default:
                 throw  new InvalidParameterException("Invalid parameter "+view.getId());
         }
+    }
+
+    /**
+     * Get picture result from camera intent
+     * @param requestCode Request code
+     * @param resultCode Result code
+     * @param data Intent data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case PICTURE_CODE:
+                if(Activity.RESULT_OK == resultCode){
+                    String result = data.toUri(Constants.INTEGER_DEFAULT);
+                    Toast.makeText(MainSecondActivity.this,
+                            "Result "+result,
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainSecondActivity.this,
+                            "Without picture",
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
+    /**
+     * Send full email
+     * @param email String email
+     */
+    private void sendEmail(String email)
+    {
+        Intent intentEmail = new Intent(Intent.ACTION_VIEW,Uri.parse(email));
+
+        intentEmail.setClassName("com.google.android.gm","com.google.android.gm.ComposeActivityGmail");
+        intentEmail.setType("plain/text");
+        //intentEmail.setType("message/rfc822");
+        intentEmail.putExtra(Intent.EXTRA_SUBJECT,"Hello");
+        intentEmail.putExtra(Intent.EXTRA_TEXT,"Lorem ipsum dolor sit amet, consectetur " +
+                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        intentEmail.putExtra(Intent.EXTRA_EMAIL,new String[]{"contact@example.com","contact2@example.com"});
+
+        startActivity(intentEmail);
+        //startActivity(Intent.createChooser(intentEmail,"Choose a email client"));
     }
 
     /**
@@ -241,9 +310,12 @@ public class MainSecondActivity extends AppCompatActivity implements View.OnClic
         startActivity(intentWeb);
     }
 
+    /**
+     * Open camera with Intent
+     */
     private void openCamera(){
-        Intent intentCall = new Intent(Intent.ACTION_CAMERA_BUTTON);
-        startActivity(intentCall);
+        Intent intentCall = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivityForResult(intentCall,PICTURE_CODE);
     }
 
 

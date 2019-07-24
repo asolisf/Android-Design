@@ -19,6 +19,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Back button in action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         messageTextView = findViewById(R.id.MessageTextView);
         intentButton = findViewById(R.id.IntentButton);
 
